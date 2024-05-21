@@ -6,17 +6,17 @@ import psycopg2
 # Configure AWS credentials
 session = boto3.Session(profile_name='default')
 s3 = session.client('s3')
-rds = session.client('rds', region_name='us-east-1')  # Replace with your AWS region
+rds = session.client('rds', region_name='us-east-1')  # AWS region
 
 # AWS S3 configurations
 s3_bucket_name = 'bucket-assign-unique123'
 s3_object_key = 's3://bucket-assign-unique123/WinfexStoreData.xlsx'
 
 # AWS RDS configurations
-rds_endpoint = 'mydb.c962ysc6eunu.us-east-1.rds.amazonaws.com'  # Replace with your RDS endpoint
-rds_database = 'mydb'  # Replace with your RDS database name
-rds_user = 'admin'  # Replace with your RDS user
-rds_password = 'password!123'  # Replace with your RDS password
+rds_endpoint = 'mydb.c962ysc6eunu.us-east-1.rds.amazonaws.com'  #  RDS endpoint
+rds_database = 'mydb'  # RDS database name
+rds_user = 'admin'  # RDS user
+rds_password = 'password!123'  # RDS password
 
 def read_from_s3():
     try:
@@ -36,8 +36,6 @@ def push_to_rds(data):
             password=rds_password
         )
         cur = conn.cursor()
-        # Use the data and insert/update records in your RDS table
-        # Example: cur.execute("INSERT INTO your_table (column1, column2) VALUES (%s, %s)", (data1, data2))
         conn.commit()
         cur.close()
         print("Data pushed to RDS successfully")
